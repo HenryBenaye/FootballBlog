@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -22,7 +23,6 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
     }
 
     /**
@@ -30,7 +30,11 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $post =  new Post();
+        $post->content = $request['input_field'];
+        $post->user_id = Auth::user()->id;
+        $post->save();
+        return route('dashboard');
     }
 
     /**
