@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')->get();
         return view('dashboard', ['posts' => $posts]);
     }
 
@@ -34,7 +34,7 @@ class PostController extends Controller
         $post->content = $request['input_field'];
         $post->user_id = Auth::user()->id;
         $post->save();
-        return route('dashboard');
+        return redirect->route('dashboard');
     }
 
     /**

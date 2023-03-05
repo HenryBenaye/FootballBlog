@@ -46,7 +46,9 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <form class="space-y-6" action="{{route('post.store')}}">
+                    <form class="space-y-6" method="post" action="{{route('post.store')}}">
+                        @method('post')
+                        @csrf
                         <div>
                             <textarea style="resize: none;" name="input_field" class="bg-gray-50 border resize:none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="What's the score" required></textarea>
                         </div>
