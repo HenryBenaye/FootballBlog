@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('post', PostController::class)->except('edit', 'create', 'update');
     Route::post('save_post', [PostController::class, 'savePost'])->name('save_post');
+    Route::post('post/{post_id}/like', [PostController::class, 'likePost'])->name('like_post');
 
 });
 
