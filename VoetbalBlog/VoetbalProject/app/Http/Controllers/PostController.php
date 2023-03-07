@@ -34,7 +34,7 @@ class PostController extends Controller
         $post->content = $request['input_field'];
         $post->user_id = Auth::user()->id;
         $post->save();
-        return redirect->route('dashboard');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -66,6 +66,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+        return redirect()->route('dashboard');
     }
 }
