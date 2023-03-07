@@ -34,16 +34,22 @@
                                             <button type="submit">Delete</button>
                                         </form>
                                     </li>
-                                @endif
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Opslaan</a>
-                                </li>
+                                @else
+                                    <li>
+                                        <form action="{{route('save_post')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-black" method="post">
+                                            @csrf
+                                            @method('post')
+                                            <input type="hidden" value="{{$post->id}}" name="post_id">
+                                            <button type="submit">Opslaan</button>
+                                        </form>
+                                    </li>
 {{--                                <li>--}}
 {{--                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>--}}
 {{--                                </li>--}}
 {{--                                <li>--}}
 {{--                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>--}}
 {{--                                </li>--}}
+                                @endif
                             </ul>
                         </div>
 

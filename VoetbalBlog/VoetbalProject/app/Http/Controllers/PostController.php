@@ -6,6 +6,8 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -57,8 +59,7 @@ class PostController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdatePostRequest $request, Post $post)
-    {
-        //
+    {//
     }
 
     /**
@@ -67,6 +68,15 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         Post::destroy($post->id);
+        return redirect()->route('dashboard');
+    }
+
+    public function savePost(Request $request)
+    {
+        DB::table('saved_posts')->insert([
+            'user_id' => Auth::user()->id,
+            'post_id' => $request['post_id']
+        ]);
         return redirect()->route('dashboard');
     }
 }
