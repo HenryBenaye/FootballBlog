@@ -79,4 +79,9 @@ class PostController extends Controller
         ]);
         return redirect()->route('dashboard');
     }
+
+    public function likePost(Request $request)
+    {
+        dd($request);
+    }
 }
