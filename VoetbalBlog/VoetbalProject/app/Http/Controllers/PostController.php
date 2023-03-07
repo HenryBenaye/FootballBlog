@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post =  new Post();
+        $post = new Post();
         $post->content = $request['input_field'];
         $post->user_id = Auth::user()->id;
         $post->save();
@@ -82,6 +82,12 @@ class PostController extends Controller
 
     public function likePost(Request $request)
     {
-        dd($request);
+
+        DB::table('liked_posts')->insert([
+            'user_id' => Auth::user()->id,
+            'post_id' => $request['postId']
+        ]);
+        return redirect()->route('dashboard');
+
     }
 }

@@ -106,7 +106,7 @@
     {
         item.addEventListener('click', (event) => {
             const key = event.target.parentNode.getAttribute('value');
-            postData(`/post/${key}/like`, {userId:{{\Illuminate\Support\Facades\Auth::user()->id}}, postId: key},)
+            postData(`/post/${key}/like`, { postId: key},)
         })
     }
 
