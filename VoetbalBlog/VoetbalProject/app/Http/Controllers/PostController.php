@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -83,11 +84,11 @@ class PostController extends Controller
     public function likePost(Request $request)
     {
 
-        DB::table('liked_posts')->insert([
-            'user_id' => Auth::user()->id,
-            'post_id' => $request['postId']
-        ]);
-        return redirect()->route('dashboard');
+        $like = new Like();
+        $like->post_id = $request['postId'];
+        $like->user_id = Auth::user()->id;
+        $like->save();
+        redirect()->route('dashboard');
 
     }
 }
