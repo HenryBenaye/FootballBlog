@@ -23,6 +23,9 @@ class Post extends Model
         return $this->hasMany(Like::class);
 
     }
-
+    public function scopeLikedPost(Builder $query)
+    {
+        $query->has('like');
+    }
 
 }
