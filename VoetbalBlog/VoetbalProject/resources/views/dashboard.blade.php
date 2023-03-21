@@ -21,7 +21,6 @@
                         <img class="rounded-full" src="https://i.pinimg.com/originals/0d/b5/e5/0db5e539765c3999422da4ee4fa1cbb9.jpg" width="70px" height="70px" alt="">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                             {{$post->user->name}}
-                            {{$post->id}}
                         </div>
                         <div class="w-full flex justify-end">
                             <div class="flex flex-row-reverse">

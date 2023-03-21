@@ -17,7 +17,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->get();
+        $posts = Post::orderBy('created_at', 'DESC');
+        $likes = Like::likedPost();
+        $result = $posts->union($likes)->get();
+        dd($result);
         return view('dashboard', ['posts' => $posts]);
     }
 
