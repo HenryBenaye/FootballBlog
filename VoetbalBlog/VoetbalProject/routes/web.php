@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('post', PostController::class)->except('edit', 'create', 'update');
     Route::post('save_post', [PostController::class, 'savePost'])->name('save_post');
     Route::post('post/{post_id}/like', [PostController::class, 'likePost'])->name('like_post');
+    Route::delete('post/{post_id}/like', [PostController::class, 'deleteLike'])->name('delete_like');
 
 });
 

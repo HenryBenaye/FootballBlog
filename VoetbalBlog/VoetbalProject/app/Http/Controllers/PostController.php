@@ -91,4 +91,9 @@ class PostController extends Controller
         redirect()->route('dashboard');
 
     }
+
+    public function delteLike(Request $request)
+    {
+        Like::destroy($request['likeId']);
+    }
 }

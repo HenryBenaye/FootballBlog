@@ -26,8 +26,7 @@
                                     </svg>
                                 </button>
                                 <button id="likeButton" value="{{$post->id}}" type="button" class="bg-white w-full flex justify-end">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="{{count($post->like) ? "red" : "none"}}" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hover:scale-110 w-6 h-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg"  value="{{$post->like}}" style="pointer-events: none" fill="{{count($post->like) ? "red" : "none"}}" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hover:scale-110 w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                         </svg>
                                 </button>
@@ -107,7 +106,14 @@
     {
         item.addEventListener('click', (event) => {
             const key = event.target.parentNode.getAttribute('value');
-            const color = event.target.getAttribute('fill');
+            const color = event.target.firstChild.nextSibling.getAttribute('fill');
+
+            if(color === 'red')
+            {
+                event.target.firstChild.nextSibling.setAttribute('fill', 'none')
+                const key = event.target.firstChild.nextSibling.getAttribute('value');
+                deleteData(`/post/${key}/like`, {likeId:key})
+            }
             postData(`/post/${key}/like`, { postId: key},)
         })
     }
@@ -116,6 +122,18 @@
     {
         const response = await fetch(url, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify(data),
+        });
+        return console.log(response.text())
+    }
+    async function deleteData(url="", data = {})
+    {
+        const response = await fetch(url, {
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 'X-CSRF-TOKEN': csrfToken,
