@@ -101,29 +101,28 @@
 <script>
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     const likeButtons = document.querySelectorAll('#likeButton');
-    likeButtons.forEach(myFunction)
-    function myFunction(item, index)
+    likeButtons.forEach(postLike)
+    function postLike(item, index)
     {
         item.addEventListener('click', (event) => {
             const key = event.target.getAttribute('value');
-            const color = event.target.firstChild.nextSibling.getAttribute('fill');
 
-            if(color === 'red')
+            if(event.target.firstChild.nextSibling.getAttribute('fill') === 'red')
             {
                 event.target.firstChild.nextSibling.setAttribute('fill', 'none')
                 const key = event.target.firstChild.nextSibling.getAttribute('value');
-                deleteData(`/post/${key}/like`, {likeId:key})
+                postData(`/post/${key}/like`, {likeId:key}, "DELETE")
             } else {
                 event.target.firstChild.nextSibling.setAttribute('fill', 'red')
-                postData(`/post/${key}/like`, { postId: key})
+                postData(`/post/${key}/like`, { postId: key}, "POST")
             }
         })
     }
 
-    async function postData(url="", data = {})
+    async function postData(url="", data = {}, method ="")
     {
         const response = await fetch(url, {
-            method: "POST",
+            method: method,
             headers: {
                 "Content-Type": "application/json",
                 'X-CSRF-TOKEN': csrfToken,
@@ -132,17 +131,6 @@
         });
         return console.log(response.text())
     }
-    async function deleteData(url="", data = {})
-    {
-        const response = await fetch(url, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                'X-CSRF-TOKEN': csrfToken,
-            },
-            body: JSON.stringify(data),
-        });
-        return console.log(response.text())
-    }
+
 
 </script>
