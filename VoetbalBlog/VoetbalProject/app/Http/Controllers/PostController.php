@@ -92,7 +92,7 @@ class PostController extends Controller
 
     }
 
-    public function delteLike(Request $request)
+    public function deleteLike(Request $request)
     {
         Like::destroy($request['likeId']);
     }
