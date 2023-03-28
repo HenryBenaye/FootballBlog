@@ -115,13 +115,15 @@
             } else {
                 event.target.firstChild.nextSibling.setAttribute('fill', 'red')
                 postData(`/post/${key}/like`, { postId: key}, "POST")
+                    .then(response => response.text())
+                    .then(data => event.target.firstChild.nextSibling.setAttribute('value', Number(data)))
             }
         })
     }
 
     async function postData(url="", data = {}, method ="")
     {
-        const response = await fetch(url, {
+        return fetch(url, {
             method: method,
             headers: {
                 "Content-Type": "application/json",
@@ -129,7 +131,6 @@
             },
             body: JSON.stringify(data),
         });
-        return console.log(response.text())
     }
 
 

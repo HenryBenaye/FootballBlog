@@ -88,7 +88,7 @@ class PostController extends Controller
         $like->post_id = $request['postId'];
         $like->user_id = Auth::user()->id;
         $like->save();
-
+        return $like->id;
     }
 
     public function deleteLike(Request $request)
