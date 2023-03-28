@@ -105,7 +105,7 @@
     function myFunction(item, index)
     {
         item.addEventListener('click', (event) => {
-            const key = event.target.parentNode.getAttribute('value');
+            const key = event.target.getAttribute('value');
             const color = event.target.firstChild.nextSibling.getAttribute('fill');
 
             if(color === 'red')
@@ -114,8 +114,8 @@
                 const key = event.target.firstChild.nextSibling.getAttribute('value');
                 deleteData(`/post/${key}/like`, {likeId:key})
             } else {
-                postData(`/post/${key}/like`, { postId: key},)
-
+                event.target.firstChild.nextSibling.setAttribute('fill', 'red')
+                postData(`/post/${key}/like`, { postId: key})
             }
         })
     }
