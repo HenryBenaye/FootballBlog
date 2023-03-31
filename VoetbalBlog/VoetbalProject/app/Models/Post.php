@@ -13,7 +13,6 @@ class Post extends Model
         'user',
         'content'
     ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -23,7 +22,6 @@ class Post extends Model
         return $this->hasMany(Like::class);
 
     }
-
     public function comment()
     {
         return $this->hasMany(Comment::class);
