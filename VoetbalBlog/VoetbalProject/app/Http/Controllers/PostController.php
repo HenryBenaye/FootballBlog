@@ -94,7 +94,8 @@ class PostController extends Controller
 
     public function deleteLike(Request $request)
     {
-        Like::destroy($request['likeId']);
+        Like::where('post_id',$request['postId'])
+            ->where('user_id',Auth::user()->id )->delete();
 
     }
 }
