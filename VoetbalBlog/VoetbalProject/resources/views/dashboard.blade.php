@@ -98,9 +98,22 @@
                     <div class="p-4 text-gray-900 dark:text-gray-100">
                         {{$post->content}}
                     </div>
-                    @if(count($post->comment))
+                    @if(count($post->comments))
                         <div class="p-4 border-y-2 text-gray-900 dark:text-gray-100">
-                            {{$post->comment[0]->comment}}
+                            @foreach($post->comments as $comment)
+                                <div class="p-2 text-gray-900 dark:text-gray-100">
+                                    <div class="flex flex-row">
+                                        <img class="rounded-full"
+                                             src="https://i.pinimg.com/originals/0d/b5/e5/0db5e539765c3999422da4ee4fa1cbb9.jpg"
+                                             width="70px" height="70px" alt="">
+                                        <div class="p-4 text-gray-900 dark:text-gray-100">
+                                            {{$comment->user->name}}
+                                        </div>
+                                    </div>
+                                    {{$comment->comment}}
+                                </div>
+                            @endforeach
+
                         </div>
                     @endif
 
